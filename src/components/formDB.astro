@@ -1,0 +1,89 @@
+---
+import '../styles/global.css'
+---
+
+<h1>Donar d'Alta Usuaris</h1>
+<form action="" class="form">
+    <div class="form-container">
+        <li>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" placeholder="Nom de l'estudiant" class="input-field" />
+        </li>
+        <li>
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" id="apellidos" placeholder="Cognoms de l'estudiant" class="input-field" />
+        </li>
+        <li>
+            <label for="email" class="form-label">Email</label>
+            <input type="text" id="email" placeholder="Curs de l'estudiant" class="input-field" />
+        </li>
+        <li>
+            <label for="tipo_user" class="form-label">Tipus de Usuari</label>
+            <select id="tipo_user">
+                <option value="estudiant">Estudiant</option>
+                <option value="professor">Professor</option>
+                <option value="admin">Administrador</option>
+            </select>
+        </li>
+        <button type="submit" class="submit">Enviar</button>
+    </div>
+</form>
+
+<style>
+
+    form, h1{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    h1{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .form{
+        margin-top: 20px;
+        padding: 20px;
+        border: 10px solid #ccc;
+        border-radius: 5px;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container{
+        list-style-type: none;
+        padding: 100px;
+        background-color: #a6d1ff;
+        border: 10px solid #ccc;
+        border-radius: 10px;
+
+    }
+
+    .form-label{
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .input-field{
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 3px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .submit{
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+</style>

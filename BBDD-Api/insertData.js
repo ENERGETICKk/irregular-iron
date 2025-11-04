@@ -23,7 +23,7 @@ const { data: zona, error: errorZona } = await supabase
   .from("aulas_zonas")
   .insert([
     {
-      nombre: "Laboratorio 3",
+      nombre: "Laboratorio 999",
       tipo: "laboratorio",
       ubicacion: "Edificio B - Planta 2",
       capacidad: 30
