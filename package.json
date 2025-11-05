@@ -4,11 +4,17 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "db-init": "node ./src/scripts/formDB-conexion.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.15.2"
+    "@supabase/supabase-js": "^2.79.0",
+    "astro": "^5.15.2",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

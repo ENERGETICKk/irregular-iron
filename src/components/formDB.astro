@@ -1,36 +1,102 @@
 ---
 import '../styles/global.css'
+import { supabase } from "../scripts/formDB-conexion.js";
+
+async function handleSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const nombre = formData.get("nombre");
+  const email = formData.get("email");
+
+  const { data, error } = await supabase.from("usuarios").insert([
+    { nombre, email, fecha_creacion: new Date().toISOString() }
+  ]);
+
+  if (error) {
+    alert("❌ Error: " + error.message);
+  } else {
+    alert("✅ Usuario insertado correctamente");
+  }
+}
 ---
 
 <h1>Donar d'Alta Usuaris</h1>
-<form action="" class="form">
+<form id="user-form" class="form" onsubmit={handleSubmit}>
     <div class="form-container">
         <li>
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" id="nombre" placeholder="Nom de l'estudiant" class="input-field" />
+            <input type="text" id="nombre" name="nombre" placeholder="Nom de l'estudiant" class="input-field" required />
         </li>
         <li>
             <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" id="apellidos" placeholder="Cognoms de l'estudiant" class="input-field" />
+            <input type="text" id="apellidos" name="apellidos" placeholder="Cognoms de l'estudiant" class="input-field" required />
         </li>
         <li>
             <label for="email" class="form-label">Email</label>
-            <input type="text" id="email" placeholder="Curs de l'estudiant" class="input-field" />
+            <input type="email" id="email" name="email" placeholder="Email de l'estudiant" class="input-field" required />
         </li>
         <li>
             <label for="tipo_user" class="form-label">Tipus de Usuari</label>
-            <select id="tipo_user">
+            <select id="tipo_user" name="tipo_user" class="input-field" required>
                 <option value="estudiant">Estudiant</option>
                 <option value="professor">Professor</option>
                 <option value="admin">Administrador</option>
             </select>
         </li>
         <button type="submit" class="submit">Enviar</button>
+        <div id="mensaje" class="mensaje"></div>
     </div>
 </form>
 
-<style>
+<script type="module">
+    import { supabase } from '../../BBDD-Api/supabaseClient.js';
 
+    const form = document.getElementById('user-form');
+    const mensaje = document.getElementById('mensaje');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const userData = {
+            nombre: formData.get('nombre'),
+            apellidos: formData.get('apellidos'),
+            email: formData.get('email'),
+            tipo_user: formData.get('tipo_user'),
+            fecha_creacion: new Date().toISOString()
+        };
+
+        try {
+            mensaje.textContent = '⏳ Guardando usuario...';
+            mensaje.className = 'mensaje loading';
+
+            const { data, error } = await supabase
+                .from('usuarios')
+                .insert([userData])
+                .select();
+
+            if (error) throw error;
+
+            mensaje.textContent = '✅ Usuario creado correctamente!';
+            mensaje.className = 'mensaje success';
+            form.reset();
+
+            setTimeout(() => {
+                mensaje.textContent = '';
+                mensaje.className = 'mensaje';
+            }, 3000);
+
+            console.log('Usuario creado:', data);
+        } catch (error) {
+            console.error('Error:', error);
+            mensaje.textContent = `❌ Error: ${error.message}`;
+            mensaje.className = 'mensaje error';
+        }
+    });
+</script>
+
+<style>
     form, h1{
         margin-left: 20px;
         margin-right: 20px;
@@ -45,7 +111,7 @@ import '../styles/global.css'
     .form{
         margin-top: 20px;
         padding: 20px;
-        border: 10px solid #ccc;
+        border: 4px solid #ccc;
         border-radius: 5px;
         max-width: 100%;
         display: flex;
@@ -59,7 +125,6 @@ import '../styles/global.css'
         background-color: #a6d1ff;
         border: 10px solid #ccc;
         border-radius: 10px;
-
     }
 
     .form-label{
@@ -74,6 +139,7 @@ import '../styles/global.css'
         margin-bottom: 15px;
         border: 3px solid #ccc;
         border-radius: 4px;
+        font-size: 14px;
     }
 
     .submit{
@@ -84,6 +150,61 @@ import '../styles/global.css'
         border-radius: 4px;
         cursor: pointer;
         margin-top: 10px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s;
     }
 
+    .submit:hover{
+        background-color: #0056b3;
+    }
+
+    .submit:disabled{
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    /* MENSAJES DE FEEDBACK */
+    .mensaje{
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+        display: none;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .mensaje.loading{
+        display: block;
+        background-color: #fff3cd;
+        color: #856404;
+        border: 2px solid #ffc107;
+    }
+
+    .mensaje.success{
+        display: block;
+        background-color: #d4edda;
+        color: #155724;
+        border: 2px solid #28a745;
+    }
+
+    .mensaje.error{
+        display: block;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 2px solid #dc3545;
+    }
 </style>

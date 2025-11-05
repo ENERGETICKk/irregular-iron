@@ -1,17 +1,21 @@
 {
   "name": "api",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node api.js",
-    "dev": "nodemon api.js"
+    "dev": "nodemon api.js",
+    "init": "node supabaseClient.js",
+    "add-user": "node consultas/insertUsuarios.js",
+    "consultar": "node consultas/selectUsuarios.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.78.0",
+    "@supabase/supabase-js": "^2.79.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "pg": "^8.16.3"
