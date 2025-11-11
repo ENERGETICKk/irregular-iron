@@ -15,44 +15,100 @@ import '../styles/global.css';
 </div>
 
 <style>
-	.container{
-		margin-top: 20%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	
+	/* Contenedor principal */
+	.container {
+	margin-top: 15%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	text-align: center;
 	}
-	.container > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-    }
+
+	/* Fondo fijo con leve blur y brillo */
 	.background {
-		position: fixed;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		z-index: -1;
-		pointer-events: none;
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+	pointer-events: none;
+	filter: brightness(0.7) contrast(1.2);
+	animation: subtleGlow 10s infinite alternate;
 	}
+
+	/* Animación sutil del fondo */
+	@keyframes subtleGlow {
+	0% { filter: brightness(0.7) contrast(1.1); }
+	50% { filter: brightness(0.8) contrast(1.2); }
+	100% { filter: brightness(0.75) contrast(1.15); }
+	}
+
+	/* Título principal */
 	.titulo {
-		color: grey;
-		font-size: 4rem;
-		text-align: center;
-		margin: 0;
-		text-shadow: 2px 2px 2px rgb(51, 51, 51);
+	color: #00ccff;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 5rem;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	text-shadow: 
+		0 0 10px #00ffff,
+		0 0 20px #3399ff,
+		0 0 30px #00ccff;
+	transition: color 0.3s ease, text-shadow 0.3s ease;
 	}
-	.acceder{
-		padding: 10px 30px;
-		border-radius: 10px;
-		background-color: grey;
+
+	.titulo:hover {
+	color: #66ffff;
+	text-shadow: 
+		0 0 20px #00ffff,
+		0 0 40px #3399ff,
+		0 0 60px #00ccff;
 	}
+
+	/* Botón "Get Started" futurista */
+	.acceder {
+	padding: 15px 40px;
+	border-radius: 12px;
+	background: linear-gradient(135deg, #00ccff, #3399ff);
+	border: none;
+	color: white;
+	font-weight: 700;
+	font-size: 1.3rem;
+	cursor: pointer;
+	box-shadow: 0 0 15px #00ccff, 0 0 30px #3399ff;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	}
+
 	.acceder:hover {
-		background-color: rgb(36, 36, 36);
+	transform: scale(1.1);
+	box-shadow: 0 0 25px #00ffff, 0 0 50px #66ccff;
+	background: linear-gradient(135deg, #00ffff, #66ccff);
 	}
+
+	/* Contenedor interno para centrar contenido */
+	.container > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+	.titulo {
+		font-size: 3.5rem;
+	}
+	.acceder {
+		padding: 12px 30px;
+		font-size: 1.1rem;
+	}
+	}
+
 </style>
 
 <script>

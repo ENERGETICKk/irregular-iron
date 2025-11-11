@@ -5,3 +5,24 @@ import FormDB from "../components/formDB.astro"
 <FormDB>
     
 </FormDB>
+
+<style>
+    /* fade-in al carregar */
+    body {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    }
+
+    body.loaded {
+    opacity: 1;
+    }
+
+</style>
+
+<script>
+    // JS para añadir la clase "loaded" al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+    });
+
+</script>

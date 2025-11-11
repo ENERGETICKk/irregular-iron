@@ -57,67 +57,139 @@ import characterImage4 from '../assets/cardsAssets/justificada.png'
 
 
 <style>
-    .container-registro{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 100px;
-        background-color: rgba(0, 195, 255, 0.368);
-        border-radius: 20px;
-    }
-    .container-registro h1{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
+
+    /* fade-in al carregar */
+    body {
+    opacity: 0;
+    transition: opacity 0.5s ease;
     }
 
-    .foto-perfil{
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        margin-bottom: 30px;
+    body.loaded {
+    opacity: 1;
     }
 
-    .cards{
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;        
+    .container-registro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+    padding: 2rem;
+    background: rgba(0, 26, 77, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 153, 255, 0.4), 0 0 50px rgba(0, 204, 255, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.4);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
     }
 
+    /* Nombre del alumno */
+    .container-registro h1 {
+    color: #00ccff;
+    font-family: "Rajdhani", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #00ffff, 0 0 25px #3399ff;
+    letter-spacing: 2px;
+    margin: 20px 0;
+    font-weight: 700;
+    }
+
+    /* Imagen de perfil con glow */
+    .foto-perfil {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 204, 255, 0.7);
+    box-shadow: 0 0 20px #00e5ff, 0 0 40px #008cff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .foto-perfil:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #3399ff;
+    }
+
+    /* Contenedor de las cards */
+    .cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    }
+
+    /* Cada card individual */
     .cards > div {
-        background-color: white;        /* Fondo de cada card */
-        border-radius: 15px;            /* Bordes redondeados */
-        padding: 50px;                  /* Espacio interno */
-        width: 150px;                    /* Ancho fijo, pero se puede hacer % */
-        text-align: center;             /* Centrar texto */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: default;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    background: rgba(0, 26, 77, 0.4);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 160px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 153, 255, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    cursor: default;
     }
 
     .cards > div:hover {
-        transform: translateY(-5px);    /* Efecto hover */
-        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    background: rgba(0, 26, 77, 0.6);
+    box-shadow: 0 0 25px rgba(0, 204, 255, 0.6), 0 0 50px rgba(0, 255, 255, 0.3);
     }
 
+    /* Texto dentro de las cards */
     .cards h2 {
-        margin: 0;
-        font-size: 1.2rem;
-        color: #333;
+    margin: 0;
+    font-size: 1.3rem;
+    color: #00eaff;
+    text-transform: uppercase;
+    font-family: "Rajdhani", sans-serif;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00ffff, 0 0 25px #0066ff;
     }
 
-    .test{
-        display: flex;
-        margin-top: 50px;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 50px;
+    /* Cards de tipo CardLD (contenedor inferior) */
+    .test {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 60px auto;
+    flex-wrap: wrap;
+    background: rgba(0, 26, 77, 0.4);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+    .container-registro {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .cards {
+        gap: 1rem;
+    }
+
+    .cards > div {
+        width: 120px;
+        padding: 1.2rem;
+    }
+
+    .test {
+        flex-direction: column;
+    }
     }
 
 </style>
+
+<script>
+    // JS para añadir la clase "loaded" al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+    });
+
+</script>
