@@ -19,11 +19,11 @@ import '../styles/global.css';
       <input type="email" id="email" name="email" placeholder="Email del estudiante" class="input-field" required />
     </li>
     <li>
-      <label for="tipo_user" class="form-label">Tipo de Usuario</label>
-      <select id="tipo_user" name="tipo_user" class="input-field" required>
+      <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
+      <select id="tipo_usuario" name="tipo_usuario" class="input-field" required>
         <option value="estudiante">Estudiante</option>
         <option value="profesor">Profesor</option>
-        <option value="administrador">Administrador</option>
+        <option value="personal">Personal de Servei</option>
       </select>
     </li>
     <button type="submit" class="submit">Enviar</button>
@@ -43,11 +43,11 @@ form.addEventListener('submit', async (e) => {
     nombre: formData.get('nombre'),
     apellidos: formData.get('apellidos'),
     email: formData.get('email'),
-    tipo_user: formData.get('tipo_user')
+    tipo_usuario: formData.get('tipo_usuario')
   };
 
   // Validación
-  if (!userData.nombre || !userData.apellidos || !userData.email || !userData.tipo_user) {
+  if (!userData.nombre || !userData.apellidos || !userData.email || !userData.tipo_usuario) {
     mensaje.textContent = '❌ Todos los campos son obligatorios';
     mensaje.className = 'mensaje error';
     return;

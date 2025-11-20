@@ -7,8 +7,20 @@
           <img src="/file-type-css.svg" alt="css">
           <img src="/file-type-js.svg" alt="css">
           <img src="/brand-supabase.svg" alt="css">
+          <img src="/astro.svg" alt="css">
         </div>
+        <p id="yo" style="text-align: end; color: grey; margin-right: 2rem;">Made by Adam El Ouahabi</p>
     </footer>
+</div>
+<div id="yo" class="hover-trigger">
+    Visita mi GitHub
+</div>
+
+<div id="github-popup" class="github-popup">
+    <p>¡Hola! Revisa mi repositorio:</p>
+    <a href="https://github.com/ENERGETICKk" target="_blank" rel="noopener noreferrer">
+         Mira en github.com/ENERGETICKk/
+    </a>
 </div>
 
 <style>
@@ -19,6 +31,20 @@
   box-shadow: 0 -5px 20px rgba(0, 153, 255, 0.3);
   padding: 2rem 0;
   margin-top: 300px;
+}
+
+#yo{
+  color: #00ccff;
+  font-size: 1rem;
+  text-shadow: 0 0 5px #00ffff, 0 0 15px #3399ff;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+#yo:hover{
+  color: #00ffff;
+  text-shadow: 0 0 15px #00ffff, 0 0 35px #3399ff;
+  transform: ;
 }
 
 .container footer p {
@@ -70,5 +96,100 @@ body {
   transform: scale(1.15) rotate(2deg);
 }
 
+.hover-trigger {
+    /* Estilo del elemento que activa el hover (ej. un icono o texto) */
+    cursor: pointer;
+    padding: 10px;
+    background: #004488;
+    color: white;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 50px; /* Para que sea visible */
+    position: relative; /* Importante para el posicionamiento del popup */
+}
+
+.github-popup {
+    /* Posicionamiento y estilos de la caja flotante */
+    position: absolute; /* Relativo al elemento más cercano posicionado (o body) */
+    top: 100%; /* Aparece justo debajo del elemento que dispara el hover */
+    left: 0;
+    
+    /* Apariencia inicial (oculto) */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Diseño */
+    width: 250px;
+    padding: 15px;
+    background: #001a4d; /* Azul oscuro */
+    border: 1px solid #00ccff; /* Borde de neón */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 204, 255, 0.5);
+    z-index: 100; /* Asegura que esté sobre otros elementos */
+    text-align: center;
+}
+
+.github-popup p {
+    color: #cceeff;
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+}
+
+.github-popup a {
+    /* Estilo del enlace */
+    display: inline-block;
+    padding: 8px 15px;
+    background: #00ccff;
+    color: #001a4d;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.github-popup a:hover {
+    background: #66ffff;
+    transform: translateY(-2px);
+}
+
 
 </style>
+
+<script>
+    // 1. Obtener referencias
+    const yo = document.getElementById('yo');
+    const githubPopup = document.getElementById('github-popup');
+
+    if (yo && githubPopup) {
+        // Función para mostrar el desplegable
+        yo.addEventListener('mouseenter', function() {
+            // Asegura que el desplegable sea visible
+            githubPopup.style.opacity = '1';
+            githubPopup.style.visibility = 'visible';
+            // Opcional: Centrarlo ligeramente con respecto al cursor o el elemento 'yo'
+            // En este CSS lo posicionamos fijo, pero puedes ajustar más si lo deseas
+        });
+
+        // Función para ocultar el desplegable al salir del área
+        yo.addEventListener('mouseleave', function() {
+            // Se oculta después de un breve retraso para permitir que el cursor pase al popup
+            setTimeout(() => {
+                // Verificar si el cursor no ha entrado en el propio popup
+                if (!githubPopup.matches(':hover')) {
+                    githubPopup.style.opacity = '0';
+                    githubPopup.style.visibility = 'hidden';
+                }
+            }, 100);
+        });
+
+        // Asegura que el popup no desaparezca si el ratón se mueve directamente al popup
+        githubPopup.addEventListener('mouseleave', function() {
+            githubPopup.style.opacity = '0';
+            githubPopup.style.visibility = 'hidden';
+        });
+
+        // Si el usuario hace clic fuera del alert, puedes poner una acción aquí
+        // yo.addEventListener('click', function() { console.log("Clic"); });
+    }
+</script>
