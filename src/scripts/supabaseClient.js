@@ -8,7 +8,7 @@ const SUPABASE_ANON_KEY = import.meta.env.SUPABASE_ANON_KEY;
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.error("❌ Faltan variables de entorno para Supabase. URL:", SUPABASE_URL, "KEY:", SUPABASE_ANON_KEY);
 } else {
-    console.log("🟢 Conectado Supabase 🟢"); 
+    console.log("🟢 Conectado Supabase"); 
 }
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

@@ -4,14 +4,11 @@ export async function POST({ request }) {
   console.log('🔵 API llamada - Inicio');
   
   try {
-    const body = await request.json();
-    console.log('📦 Body recibido:', body);
-    
+    const body = await request.json();    
     const { nombre, apellidos, email, tipo_usuario } = body;
 
     
     if (!nombre || !apellidos || !email || !tipo_usuario) {
-      console.log('❌ Validación fallida - campos vacíos');
       return new Response(
         JSON.stringify({ error: 'Todos los campos son obligatorios' }),
         { 
@@ -46,7 +43,7 @@ export async function POST({ request }) {
       .select();
 
     if (error) {
-      console.error('❌ ERROR SUPABASE:', error);
+      console.error('ERROR SUPABASE:', error);
       return new Response(
         JSON.stringify({ 
           error: error.message,
@@ -59,7 +56,7 @@ export async function POST({ request }) {
       );
     }
 
-    console.log('✅ Usuario insertado:', data);
+    console.log('Usuario insertado:', data);
     
     return new Response(
       JSON.stringify({ 
@@ -73,7 +70,7 @@ export async function POST({ request }) {
     );
 
   } catch (err) {
-    console.error('💥 ERROR CATCH:', err);
+    console.error('ERROR CATCH:', err);
     return new Response(
       JSON.stringify({ 
         error: err.message 

@@ -1,7 +1,6 @@
 import { supabase } from '../../scripts/supabaseClient';
 
 export async function GET() {
-  console.log('🔵 API llamada - Obtener Usuarios');
 
   try {
     
@@ -11,7 +10,6 @@ export async function GET() {
       .order('fecha_creacion', { ascending: false }); 
 
     if (error) {
-      console.error('❌ ERROR SUPABASE al obtener usuarios:', error);
       return new Response(
         JSON.stringify({ 
           error: error.message,
@@ -24,7 +22,6 @@ export async function GET() {
       );
     }
 
-    console.log(`✅ ${data.length} usuarios encontrados.`);
     
     return new Response(
       JSON.stringify({ 
@@ -38,7 +35,6 @@ export async function GET() {
     );
 
   } catch (err) {
-    console.error('💥 ERROR CATCH en getUsers:', err);
     return new Response(
       JSON.stringify({ 
         error: 'Error interno del servidor al procesar la solicitud.',
